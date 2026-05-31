@@ -4,6 +4,12 @@ const sampler = {
         const generateBtn = document.getElementById('generate-sample-btn');
         if (!outputArea || !generateBtn) return;
 
+        // --- AI sample generation temporarily disabled (no Gemini API key configured) ---
+        // Short-circuits before any network call so nothing hits /api/generate or 500s.
+        // To re-enable: set GEMINI_API_KEY in Vercel and remove this block.
+        outputArea.innerHTML = `<div class="p-6"><p class="text-center text-gray-500">AI sample generation is currently disabled.</p></div>`;
+        return;
+
         generateBtn.disabled = true;
         generateBtn.textContent = 'Generating...';
         outputArea.innerHTML = `<div class="p-6"><p class="text-center text-gray-500">AI is thinking... please wait.</p></div>`;
