@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+/node_modules
+
+# Environment variables
+# Keep API keys and other secrets out of version control.
+.env
+
+# Google OAuth client secret files
+# These are highly confidential and must not be committed.
+client_secret_*.json
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Diagnostic scripts
+check-models.js
+
+# macOS
+.DS_Store

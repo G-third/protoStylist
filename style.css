@@ -1,0 +1,405 @@
+:root {
+  color-scheme: light dark;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    /* background-color: var(--bg-gray-300);; */
+}
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 1px;
+    height: 1px;
+}
+
+body.is-scrolling ::-webkit-scrollbar {
+    width: 1px;
+    height: 1px;
+}
+::-webkit-scrollbar-track {
+    background: #ffffff;
+}
+::-webkit-scrollbar-thumb {
+    background: #ffffff;
+    border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Control Panel Styles */
+.pst-control-group-heading {
+    padding: 0.5rem 0.5rem 0.5rem 0;
+    margin-bottom: .5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #232323;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pst-control-item {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: .30rem;
+}
+
+.pst-control-item label {
+    font-size: 0.8rem; 
+    color: #858585;
+    flex-shrink: 0; 
+    margin-right: 1rem;
+}
+
+/* Contrpl input styles */
+.pst-control-item input[type="text"],
+.pst-control-item input[type="number"],
+.pst-control-item select {
+    padding-top: 0.0125rem;
+    padding-bottom: 0.0125rem;
+    font-size:small;
+    width: 100%;
+    border:none;
+    /* color:red; */
+}
+
+.pst-tooltip-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 9999px;
+    background-color: #9ca3af;
+    color: white;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-style: normal;
+    font-weight: bold;
+    cursor: help;
+    margin-left: 0.25rem;
+    vertical-align: middle;
+}
+
+.pst-control-item input[type="color"] {
+    -webkit-appearance: none; 
+    width: 2.5rem; 
+    height: 1.5rem;
+    border: none; 
+    padding: 0; 
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.pst-control-item input[type="color"]::-webkit-color-swatch-wrapper { 
+    padding: 0; 
+}
+.pst-control-item input[type="color"]::-webkit-color-swatch { 
+    border: 1px solid #d1d5db;
+    border-radius: 2px;
+}
+
+/* A unique, non-configurable style for checkboxes used within the app's own UI (controls, header).
+   This prevents them from being affected by user-generated styles for `.form-checkbox`. */
+.pst-app-checkbox {
+    accent-color: #4f46e5; /* A default indigo color */
+}
+
+/* Custom Slider Styles */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    background: transparent;
+    cursor: pointer;
+}
+
+/* Webkit (Chrome, Safari) */
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 1px;
+    background: #9f9f9f; /* gray-500 */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    margin-top: -7px; /* (thumb height - track height) / 2 */
+    background-color: #656565;
+    height: 16px;
+    width: 16px;
+    border-radius: 4px;
+}
+
+/* Firefox */
+input[type="range"]::-moz-range-track {
+    height: 2px;
+    background: #6b7280; /* gray-500 */
+}
+
+input[type="range"]::-moz-range-thumb {
+    background-color: #656565;
+    height: 16px;
+    width: 16px;
+    border-radius: 4px;
+    border: none;
+}
+
+/* Navigation Menu Styles */
+.pst-nav-link {
+    display: block; 
+    padding: 0.275rem 1rem 0.275rem 0; 
+    border-radius: 2px;
+    font-size: 0.8rem; 
+    color: #9d9d9d; 
+    transition: all .1s;
+    padding-left: 8px;
+}
+
+.pst-nav-pattern {
+    background-size: 6px 6px;
+    background-image: repeating-linear-gradient(45deg, #ebebeb 0, #ebebeb 0.9px, #ffffff 0, #ffffff 50%);
+}
+
+.pst-nav-link:hover { 
+    background-color: var(--app-bg-hover);
+    color: var(--app-text-primary);
+}
+
+.pst-nav-link.active {
+    background-color: var(--app-bg-active); 
+    color: var(--app-text-primary); 
+    font-weight: 450;
+    /* text-indent: 8px; */
+}
+
+.pst-nav-accordion {
+    margin-top: 1.5rem;
+}
+.pst-nav-accordion:first-child {
+    margin-top: 0;
+}
+
+.pst-nav-accordion-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 0.5rem 0.5rem 0;
+    margin-bottom: .5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #232323;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pst-nav-accordion-icon {
+    width: 0.875rem; /* 14px */
+    height: 0.875rem; /* 14px */
+    color: #6b7280; /* text-gray-500 */
+    transition: transform 0.2s ease-out;
+    flex-shrink: 0;
+}
+
+.pst-nav-accordion-toggle.is-open .pst-nav-accordion-icon {
+    transform: rotate(180deg);
+}
+
+/* Accordion Styles */
+.pst-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.15s ease-out;
+}
+
+.pst-nav-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.15s ease-out;
+    padding-left: 0.1rem; /* 12px indent */
+}
+
+/* CSS Overlay for Footer */
+.pst-bottom-overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    z-index: 40;
+    transform: translateY(calc(100% - 54px));
+}
+
+.pst-bottom-overlay.is-open {
+    transform: translateY(-1px);
+}
+
+/* Control Accordion Styles */
+.pst-control-accordion {
+    margin-top: 1.5rem;
+}
+
+.pst-control-accordion-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    border-top: 1px solid #DDDDDD;
+    cursor: pointer;
+    padding: 0.5rem 0.5rem 0.5rem 0;
+    margin-bottom: .5rem;
+    font-size: 0.70rem;
+    font-weight: 700;
+    color: #5f5f5f;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.pst-control-accordion-icon {
+    width: 0.875rem; /* 14px */
+    height: 0.875rem; /* 14px */
+    color: #6b7280; /* text-gray-500 */
+    transition: transform 0.15s ease-out;
+    flex-shrink: 0;
+}
+
+.pst-control-accordion-toggle.is-open .pst-control-accordion-icon {
+    transform: rotate(180deg);
+}
+
+.pst-control-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.15s ease-out;
+}
+
+/* Utility to disable transitions during JS-driven redraws */
+.pst-no-transition .pst-control-accordion-content {
+    transition: none;
+}
+
+
+/* Sampler Content Block */
+.pst-sampler-content-block {
+    width: 100%;
+    min-height: calc(100vh - 180px); /* Approximate full-page height minus headers/padding */
+    /* padding: 24px; */ /* Padding is now handled by the generated content */
+    /* border: 1px solid #e2e2e2; */
+    background-color: var(--bg-color, #ffffff);
+    color: var(--text-color, #3d3d3d);
+    border-radius: var(--border-radius, 4px);
+}
+/* Fullscreen Sampler Preview */
+.pst-sampler-preview-container.is-fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2000; /* Higher than header and other modals */
+    background-color: var(--bg-color, #ffffff);
+    overflow-y: auto;
+}
+
+.pst-sampler-preview-container.is-fullscreen .pst-sampler-content-block {
+    min-height: 100vh;
+}
+
+.pst-sampler-preview-container.is-fullscreen #fullscreen-toggle-btn {
+    position: fixed; /* Keep it in the viewport corner */
+    top: 1rem;
+    right: 1rem;
+}
+
+/* Collapsible Navigation Styles */
+.pst-main-grid.pst-nav-collapsed {
+    grid-template-columns: 0px 1fr 320px;
+    gap: 0;
+}
+
+.pst-main-grid.pst-nav-collapsed .pst-left-panel {
+    opacity: 0;
+    min-width: 0; /* Animate this property to collapse the panel */
+    padding: 0;
+    overflow: hidden;
+}
+
+.pst-main-grid.pst-nav-collapsed .pst-nav-toggle-btn {
+    transform: translateX(-182px);
+    border: none;
+}
+
+.pst-main-grid.pst-nav-collapsed .pst-nav-toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* Darken Background Functionality */
+/* Apply transition to elements that change background */
+main, main .sticky, #nav-toggle-btn {
+    transition: background-color 0.25s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Apply dark background when the main grid is in dark mode */
+.pst-main-grid.pst-dark-preview-bg main {
+    background-color: #000000 !important; /* Use important to override any inline styles */
+}
+.pst-main-grid.pst-dark-preview-bg .pst-preview-header{
+    background-color: #000000; /* This can remain as is */
+}
+
+/* Custom Select Dropdown with Swatches */
+.pst-custom-select-container {
+    position: relative;
+    width: 100%;
+}
+
+.pst-custom-select-toggle {
+    position: relative;
+    width: 100%;
+    background-color: #f9fafb; /* bg-gray-50 */
+    border: none;
+    border-radius: 2px; /* rounded-sm */
+    padding: 0.25rem 0; /* px-2 py-1 */
+    text-align: right;
+    font-size: 0.85rem; /* text-sm */
+}
+
+
+.pst-custom-select-options {
+    display: none; /* Hidden by default */
+    position: absolute;
+    z-index: 50;
+    margin-top: 0.25rem;
+    width: 100%;
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    max-height: 15rem; /* 240px */
+    overflow-y: auto;
+    padding: 0.25rem 0;
+}
+
+.pst-custom-select-container.is-open .pst-custom-select-options {
+    display: block; /* Show when open */
+}
+
+.pst-custom-select-option {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.5rem 0.75rem;
+    padding: 0.25rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.pst-custom-select-option:hover {
+    background-color: #f3f4f6; /* bg-gray-100 */
+}

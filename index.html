@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>protoStylist</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100..900&family=Noto+Serif:wght@100..900&family=Playfair+Display:wght@400..900&family=Prata&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-zinc-100 text-gray-800">
+
+    <div class="flex flex-col h-screen">
+        <!-- Header -->
+        <header class="pst-header bg-white border-b border-zinc-200 py-1 px-4 shadow-xs flex justify-between items-center flex-wrap">
+            <div>
+                <h1 class="pst-header-logo text-2xl font-bold text-black">proto/Stylist</h1>
+            </div>
+            <div class="flex items-center space-x-2 mt-2 sm:mt-0">
+                <!-- About Button -->
+                <button id="about-btn" title="About this tool" class="pst-header-button h-10 flex items-center justify-center bg-white text-gray-700 border border-gray-400 rounded-sm hover:bg-gray-100 transition-colors px-4">
+                    <span class="text-sm font-semibold">About p/S</span>
+                </button>
+
+                <!-- Darken Background Toggle -->
+                <div id="darken-background-toggle" class="pst-header-button h-10 flex items-center justify-center bg-white text-gray-700 border border-gray-400 rounded-sm hover:bg-gray-100 transition-colors px-3 cursor-pointer">
+                    <input type="checkbox" id="darken-background-checkbox" class="pst-app-checkbox h-4 w-4 text-gray-600 rounded-sm border-gray-300 focus:ring-indigo-500 cursor-pointer">
+                    <span class="border-l border-gray-300 h-full mx-3"></span>
+                    <label for="darken-background-checkbox" class="text-sm font-semibold cursor-pointer select-none">Darken</label>
+                </div>
+
+                <div class="flex">
+                    <!-- Save Button -->
+                    <button id="save-btn" title="Save current styles as a new version" class="pst-header-button h-10 flex items-center justify-center bg-white text-gray-700 border border-r-0 border-gray-400 rounded-l-sm hover:bg-gray-100 transition-colors px-4">
+                        <span class="text-sm font-semibold">Save</span>
+                    </button>
+                    <!-- Versions Dropdown - Populated by JS -->
+                    <div id="version-controls" class="pst-version-controls relative"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div id="main-grid" class="pst-main-grid relative grid grid-cols-1 lg:grid-cols-[180px_1fr_320px] flex-grow px-4 h-full pt-4 transition-all duration-200 ease-in-out">
+            <!-- Nav Toggle Button -->
+            <button id="nav-toggle-btn" title="Toggle Navigation" class="pst-nav-toggle-btn absolute top-6 left-48 ml-2 z-30 w-10 h-8 pl-2 flex items-center justify-center">
+                <svg id="nav-toggle-icon" class="pst-nav-toggle-icon w-6 h-6 text-zinc-400" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 18h13v-2H3v2zm0-5h10v-2H3v2zm0-7v2h13V6H3zm18 9.59L17.42 12 21 8.41 19.59 7l-5 5 5 5L21 15.59z"></path></svg>
+            </button>
+
+            <!-- Left Panel: Navigation Menu -->
+            <aside id="left-panel" class="pst-left-panel bg-zinc-100 rounded-sm px-0 pr-2 pb-[120px] overflow-y-auto transition-all duration-200 ease-in-out">
+                <h2 class="pst-panel-heading sticky top-0 bg-zinc-100 pt-10 pb-4 text-xs font-mono text-gray-400 mb-[24px] z-10"></h2>
+                <nav id="main-nav" class="pst-main-nav"></nav>
+            </aside>
+
+            <!-- Center Panel: Preview -->
+            <main class="bg-white rounded-sm px-4 pb-[180px] overflow-y-auto relative z-10 border-b border-zinc-200">
+                <div id="preview-header" class="pst-preview-header sticky top-0 bg-white pt-12 pb-4 pl-8 mb-8 z-10">
+                    <h2 id="preview-heading" class="pst-panel-heading text-xs font-mono text-zinc-400">Preview</h2>
+                </div>
+                <div id="preview-area" class="pst-preview-area"></div>
+            </main>
+
+            <!-- Right Panel: Controls -->
+            <aside class="relative z-20 bg-zinc-100 rounded-sm px-0 pl-4 pb-[120px] flex flex-col overflow-y-auto">
+                <h2 class="pst-panel-heading sticky top-0 bg-zinc-100 pt-10 pb-4 text-xs font-mono text-gray-400 mb-[24px]"></h2>
+                <div id="controls-area" class="pst-controls-area flex-shrink-0"></div>
+            </aside>
+        </div>
+
+        <!-- CSS Output Footer -->
+        <footer id="bottom-overlay" class="pst-bottom-overlay bg-black text-gray-200 flex flex-col">
+            <!-- Toggles Container -->
+            <div class="flex flex-shrink-0">
+                <div id="sampler-accordion-toggle" class="pst-footer-toggle w-1/5 px-6 py-4 focus:outline-none flex items-center space-x-4 cursor-pointer bg-white border-t border-neutral-300">
+                    <svg id="sampler-accordion-icon" class="pst-footer-toggle-icon w-5 h-5 text-neutral-900 transform transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <span class="text-base font-bold text-neutral-900">proto/Sampler</span>
+                </div>
+                <div id="css-accordion-toggle" class="pst-footer-toggle w-4/5 px-6 py-4 focus:outline-none flex items-center space-x-4 cursor-pointer">
+                    <svg id="css-accordion-icon" class="pst-footer-toggle-icon w-5 h-5 text-gray-400 transform transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <span class="text-base font-bold text-neutral-300">Styles & Components</span>
+                </div>        
+            </div>
+            <!-- Content Panels -->
+            <div id="sampler-content-wrapper" class="pst-overlay-content-wrapper flex-grow min-h-0 overflow-auto hidden bg-white">
+                <div id="sampler-output" class="pst-sampler-output p-8 space-y-8"></div>
+            </div>
+            <div id="css-content-wrapper" class="pst-overlay-content-wrapper p-8 flex-grow flex flex-col min-h-0 hidden bg-black">
+                <div class="flex flex-col md:flex-row w-full h-full">
+                    <!-- Column 1: CSS -->
+                    <div class="flex-1 flex flex-col min-w-0 h-[calc(100vh-200px)] md:pr-8">
+                        <div class="flex-shrink-0 flex justify-start mb-8">
+                            <button id="export-css-btn" class="pst-button bg-white text-gray-900 font-semibold py-2 px-4 rounded-sm hover:bg-gray-200 transition-colors text-sm">Export CSS File</button>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-300 mb-4 shrink-0 text-left">CSS Tokens & Classes</h3>
+                        <pre class="flex-grow w-full rounded-sm bg-black overflow-y-auto whitespace-pre-wrap break-words"><code id="css-output" class="text-xs text-gray-300 font-mono"></code></pre>
+                    </div>
+                    <!-- Column 2: JS -->
+                    <div class="flex-1 flex flex-col min-w-0 h-[calc(100vh-200px)] md:pl-8 mt-8 md:mt-0">
+                        <div class="flex-shrink-0 flex justify-start mb-8">
+                            <button id="export-js-btn" class="pst-button bg-white text-gray-900 font-semibold py-2 px-4 rounded-sm hover:bg-gray-200 transition-colors text-sm">Export Components</button>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-300 mb-4 shrink-0 text-left">Web Components (Vanilla JS)</h3>
+                        <pre class="flex-grow w-full rounded-sm bg-black overflow-y-auto whitespace-pre-wrap break-words"><code id="js-output" class="text-xs text-gray-300 font-mono"></code></pre>
+                    </div>
+                </div>
+            </div>      
+        </footer>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal-overlay" class="pst-modal-overlay fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4">
+        <div id="about-modal-content" class="pst-modal-content bg-white rounded-sm shadow-xl p-8 max-w-2xl w-full relative">
+            <button id="about-modal-close-btn" class="pst-modal-close-btn absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h2 class="text-2xl font-bold mb-6">About proto/Stylist</h2>
+            <div class="text-neutral-600 text-base">
+                <ul class="list-disc list-outside space-y-3 pl-5">
+                    <li><strong>proto/Stylist</strong> is a tool for rapidly establishing foundational CSS for web prototypes. It generates core design tokens and barebones styles to accelerate early-stage design.</li>
+                    <li>The output is a starting point, not a production-ready design system. It provides a solid baseline that can be extended and refined during detailed design and development.</li>
+                    <li>For best results, work "atomically" from the top down. Start by defining your <strong>Baseline Styles</strong> (Typography, Color, etc.), which serve as the foundation for the <strong>Controls & Input</strong> and <strong>Components</strong> further down the list.</li>
+                    <li>As you make selections, styles are generated in the <strong>Tokens & CSS</strong> viewer below. You can export a CSS file at any time or preview your styles in sample layouts using the <strong>Style Sampler</strong> app.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- This style tag is used by JavaScript to inject dynamic styles -->
+    <style id="dynamic-styles"></style>
+
+    <!-- Custom JavaScript -->
+    <script src="typography.js"></script>
+    <script src="color.js"></script>
+    <script src="curves.js"></script>
+    <script src="spacing.js"></script>
+    <script src="borders.js"></script>
+    <script src="icon.js"></script>
+    <script src="button.js"></script>
+    <script src="text-input.js"></script>
+    <script src="textarea-input.js"></script>
+    <script src="select-input.js"></script>
+    <script src="checkbox-radio.js"></script>
+    <script src="accordion.js"></script>
+    <script src="tab.js"></script>
+    <script src="modal.js"></script>
+    <script src="progress.js"></script>
+    <script src="text-content.js"></script>
+    <script src="sampler.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
