@@ -88,8 +88,8 @@ ${tokenSummary}
 
         // 4. Make the API call (THIS IS A PLACEHOLDER)
         try {
-            // This fetch call goes to your local Node.js server (`server.js`), which then securely calls the Gemini API.
-            const response = await fetch('http://localhost:3000/api/generate', {
+            // Relative path: served by the Vercel function in /api (and by `vercel dev` locally).
+            const response = await fetch('/api/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ prompt: prompt })
