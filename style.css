@@ -1,0 +1,1472 @@
+/* style.css
+   Tool shell styles for proto/Stylist.
+   Strictly decoupled from generated preview styles.
+   Australian English spelling used in comments. */
+
+:root {
+    color-scheme: light dark;
+
+    /* Shell layout widths */
+    --pst-left-width: 220px;
+    --pst-right-width: 320px;
+
+    /* Transition standardisation */
+    --pst-transition-duration: 300ms;
+    --pst-transition-easing: cubic-bezier(0.95, 0.05, 0.05, 0.95);
+
+    /* Theme tokens - Light Mode (Default) */
+    --pst-shell-bg-app: #ffffff;
+    --pst-shell-bg: #ffffff;
+    --pst-shell-text: #050505;
+    --pst-shell-text-sec: #888888;
+    --pst-shell-text-ter: #b5b5b5;
+    --pst-shell-border: #e4e4e7;
+    /* zinc-200 */
+    --pst-shell-radius: 6px;
+    /* Consistent standard corner radius */
+    --pst-shell-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    /* Faint conservative shadow */
+    --pst-shell-hover: #f4f4f5;
+    /* zinc-100 */
+    --pst-shell-active: #e4e4e7;
+    /* zinc-200 */
+
+    /* Font Family baseline for shell chrome */
+    --pst-shell-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.pst-dark-mode {
+    /* Theme tokens - Dark Mode */
+    --pst-shell-bg-app: #09090b;
+    --pst-shell-bg: #09090b;
+    --pst-shell-text: #ffffff;
+    --pst-shell-text-sec: #b5b5b5;
+    --pst-shell-text-ter: #888888;
+    --pst-shell-border: #27272a;
+    /* zinc-800 */
+    --pst-shell-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    --pst-shell-hover: #27272a;
+    /* zinc-800 */
+    --pst-shell-active: #3f3f46;
+    /* zinc-700 */
+}
+
+/* Base Body settings */
+body {
+    font-family: var(--pst-shell-font);
+    background-color: var(--pst-shell-bg-app);
+    color: var(--pst-shell-text);
+    transition: background-color var(--pst-transition-duration) var(--pst-transition-easing), color var(--pst-transition-duration) var(--pst-transition-easing);
+}
+
+/* Shell Chrome Containers (Floating Cards) */
+.pst-header {
+    background-color: var(--pst-shell-bg-app) !important;
+    border-bottom: 1px solid var(--pst-shell-border) !important;
+    font-family: var(--pst-shell-font);
+    padding: 1.25rem;
+    z-index: 50;
+    transition: all var(--pst-transition-duration) var(--pst-transition-easing);
+}
+
+.pst-header-logo {
+    color: var(--pst-shell-text) !important;
+}
+
+.pst-header-button {
+    background-color: var(--pst-shell-bg) !important;
+    color: var(--pst-shell-text-sec) !important;
+    border: 1px solid var(--pst-shell-border) !important;
+    border-radius: var(--pst-shell-radius) !important;
+    transition: all var(--pst-transition-duration) var(--pst-transition-easing);
+    font-family: var(--pst-shell-font);
+}
+
+.pst-header-button:hover {
+    background-color: var(--pst-shell-hover) !important;
+    color: var(--pst-shell-text) !important;
+}
+
+.pst-main-grid {
+    display: grid;
+    grid-template-columns: var(--pst-left-width) 1fr var(--pst-right-width);
+    transition: grid-template-columns var(--pst-transition-duration) var(--pst-transition-easing);
+    background-color: var(--pst-shell-bg-app);
+    gap: 0 !important;
+    padding: 0 !important;
+}
+
+.pst-preview-area {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 40px 32px !important;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Reset the top margin of the first preview heading to keep the top gap at exactly 40px */
+.preview-canvas > :first-child .pst-preview-heading,
+.preview-canvas > .pst-preview-heading:first-child {
+    margin-top: 0 !important;
+}
+
+/* Floating Card Panels */
+.pst-left-panel,
+.pst-center-panel,
+.pst-right-panel {
+    background-color: var(--pst-shell-bg);
+    border: 1px solid var(--pst-shell-border);
+    border-radius: var(--pst-shell-radius);
+    box-shadow: var(--pst-shell-shadow);
+    padding: 1.25rem;
+    transition: background-color var(--pst-transition-duration) var(--pst-transition-easing), border-color var(--pst-transition-duration) var(--pst-transition-easing), box-shadow var(--pst-transition-duration) var(--pst-transition-easing);
+}
+
+.pst-left-panel {
+    transition: width var(--pst-transition-duration) var(--pst-transition-easing), height var(--pst-transition-duration) var(--pst-transition-easing), border-radius var(--pst-transition-duration) var(--pst-transition-easing), opacity var(--pst-transition-duration) var(--pst-transition-easing);
+    overflow-y: auto;
+    position: relative;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-right: 1px solid var(--pst-shell-border) !important;
+}
+
+.pst-right-panel {
+    overflow-y: auto;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-left: 1px solid var(--pst-shell-border) !important;
+}
+
+.pst-center-panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden !important;
+    background-color: var(--pst-shell-bg-app) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    position: relative;
+    padding: 0 !important;
+}
+
+
+
+/* Navigation Links */
+.pst-nav-link {
+    display: block;
+    padding: 0.375rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: var(--pst-shell-text-sec);
+    transition: all var(--pst-transition-duration) var(--pst-transition-easing);
+    text-decoration: none;
+    margin-bottom: 0.25rem;
+}
+
+.pst-nav-link:hover {
+    background-color: var(--pst-shell-hover);
+    color: var(--pst-shell-text);
+}
+
+.pst-nav-link.active {
+    background-color: var(--pst-shell-active);
+    color: var(--pst-shell-text);
+    font-weight: 400;
+}
+
+.pst-nav-accordion-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 0.25rem;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--pst-shell-text);
+}
+
+.pst-nav-accordion-icon {
+    width: 0.75rem;
+    height: 0.75rem;
+    color: var(--pst-shell-text-sec);
+    transition: transform var(--pst-transition-duration) var(--pst-transition-easing);
+}
+
+.pst-nav-accordion-toggle.is-open .pst-nav-accordion-icon {
+    transform: rotate(180deg);
+}
+
+.pst-nav-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--pst-transition-duration) var(--pst-transition-easing);
+}
+
+/* Panel Headings */
+.pst-panel-heading {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--pst-shell-text-sec);
+}
+
+/* Control Panel Accordions */
+.pst-control-accordion {
+    border-top: none;
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+}
+
+.pst-control-accordion-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--pst-shell-text-sec);
+}
+
+.pst-control-accordion-toggle:hover {
+    color: var(--pst-shell-text);
+}
+
+.pst-control-accordion-icon {
+    width: 0.75rem;
+    height: 0.75rem;
+    color: var(--pst-shell-text-sec);
+    transition: transform var(--pst-transition-duration) var(--pst-transition-easing);
+}
+
+.pst-control-accordion-toggle.is-open .pst-control-accordion-icon {
+    transform: rotate(180deg);
+}
+
+.pst-control-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--pst-transition-duration) var(--pst-transition-easing);
+}
+
+/* Form Controls & Inputs */
+.pst-control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px !important;
+    padding: 1px 0 !important;
+}
+
+.pst-control-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2px !important;
+    padding: 1px 0 !important;
+}
+
+.pst-control-item label {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: var(--pst-shell-text-sec);
+    user-select: none;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+}
+
+/* Scrubbable Input Label style */
+.pst-control-item label.pst-scrubbable {
+    cursor: ew-resize;
+    position: relative;
+    padding: 2px 4px;
+    margin-left: -4px !important;
+    border-radius: 4px;
+    transition: background-color var(--pst-transition-duration) var(--pst-transition-easing), color var(--pst-transition-duration) var(--pst-transition-easing);
+}
+
+.pst-control-item label.pst-scrubbable:hover {
+    background-color: var(--pst-shell-hover);
+    color: var(--pst-shell-text);
+}
+
+.pst-control-item label.pst-scrubbable:active {
+    background-color: var(--pst-shell-active);
+}
+
+/* Text & Select Inputs */
+.pst-control-item input[type="text"],
+.pst-control-item input[type="number"],
+.pst-control-item select {
+    background-color: var(--pst-shell-bg);
+    color: var(--pst-shell-text);
+    border: 1px solid var(--pst-shell-border);
+    border-radius: 4px;
+    padding: 2px 6px !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    font-family: var(--pst-shell-font);
+    outline: none;
+    text-align: right;
+    height: 24px !important;
+    width: 110px !important;
+    min-width: 110px !important;
+    max-width: 110px !important;
+    box-sizing: border-box !important;
+    transition: border-color var(--pst-transition-duration) var(--pst-transition-easing);
+}
+
+.pst-control-item input[type="number"] {
+    padding-right: 2px !important;
+}
+
+.pst-control-item input[type="text"]:focus,
+.pst-control-item input[type="number"]:focus,
+.pst-control-item select:focus {
+    border-color: var(--pst-shell-text-sec);
+}/* Segmented Buttons Control */
+.pst-segmented-group {
+    display: inline-flex;
+    border: 1px solid var(--pst-shell-border);
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: var(--pst-shell-hover);
+}
+
+.pst-segmented-btn {
+    background: transparent;
+    border: none;
+    color: var(--pst-shell-text-sec);
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all var(--pst-transition-duration) var(--pst-transition-easing);
+    font-family: var(--pst-shell-font);
+}
+
+.pst-segmented-btn:hover {
+    color: var(--pst-shell-text);
+}
+
+.pst-segmented-btn.active {
+    background-color: var(--pst-shell-bg);
+    color: var(--pst-shell-text);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Custom Swatch with Popover Picker */
+.pst-swatch-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.pst-color-swatch {
+    width: 2.25rem;
+    height: 1.25rem;
+    border-radius: 4px;
+    border: 1px solid var(--pst-shell-border);
+    cursor: pointer;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.pst-color-swatch-popover {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 1.75rem;
+    z-index: 100;
+    background-color: var(--pst-shell-bg);
+    border: 1px solid var(--pst-shell-border);
+    border-radius: var(--pst-shell-radius);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem;
+}
+
+.pst-color-swatch-popover.is-open {
+    display: block;
+}
+
+/* Design System Tabs (Center Panel) */
+.pst-center-content-layout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.pst-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px !important;
+    padding: 0 1rem;
+    border-bottom: 1px solid var(--pst-shell-border) !important;
+    background-color: var(--pst-shell-bg) !important;
+    box-sizing: border-box !important;
+    flex-shrink: 0;
+}
+
+/* Sliding Tab Content Drawer */
+.pst-tabs-drawer {
+    width: 0;
+    flex-shrink: 0;
+    background-color: var(--pst-shell-bg) !important;
+    border-left: 1px solid transparent !important;
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: width var(--pst-transition-duration) var(--pst-transition-easing), border-color var(--pst-transition-duration) var(--pst-transition-easing);
+}
+
+.pst-tabs-drawer.is-open {
+    width: 50%;
+    border-left: 1px solid var(--pst-shell-border) !important;
+}
+
+.pst-drawer-toggle-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    color: var(--pst-shell-text-sec);
+    padding: 0;
+    transition: all var(--pst-transition-duration) var(--pst-transition-easing);
+}
+
+.pst-drawer-toggle-btn:hover {
+    color: var(--pst-shell-text);
+    background-color: var(--pst-shell-active);
+}
+
+.pst-drawer-toggle-icon {
+    width: 14px;
+    height: 14px;
+    transition: transform var(--pst-transition-duration) var(--pst-transition-easing);
+    transform: rotate(0deg);
+}
+
+.pst-tabs-drawer.is-open .pst-drawer-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.pst-tab-btn {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--pst-shell-text-sec);
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all var(--pst-transition-duration) var(--pst-transition-easing);
+    font-family: var(--pst-shell-font);
+}
+
+.pst-tab-btn:hover {
+    color: var(--pst-shell-text);
+}
+
+.pst-tab-btn.active {
+    border-bottom-color: var(--pst-shell-text);
+    color: var(--pst-shell-text);
+}
+
+.pst-tabs-drawer .pst-tab-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1.25rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--pst-transition-duration) var(--pst-transition-easing);
+}
+
+.pst-drawer-heading {
+    font-family: monospace, sans-serif !important;
+    font-size: 10px !important;
+    color: var(--pst-shell-text-sec) !important;
+    letter-spacing: 0.05em !important;
+    text-transform: none !important;
+}
+
+.pst-tabs-drawer.is-open .pst-tab-content {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.pst-tab-panel {
+    display: block;
+}
+
+.pst-tab-panel.hidden {
+    display: none;
+}
+
+/* Active tab panel expands to fill height and aligns children vertically */
+.pst-tab-panel:not(.hidden) {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+    width: 100%;
+}
+
+/* Unified styled container for center-aligned empty and loading feedback messages */
+.pst-system-feedback {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--pst-shell-text-sec) !important;
+    font-size: 12px !important;
+    font-family: var(--pst-shell-font) !important;
+    padding: 2rem !important;
+    min-height: 200px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Light Scrollbars for clean visual layout */
+::-webkit-scrollbar {
+    width: 1px !important;
+    height: 1px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.01) !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #666666 !important;
+    border-radius: 9999px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #444444 !important;
+}
+
+/* Custom Alert & Helper Styles */
+.pst-help-text {
+    font-size: 0.75rem;
+    color: var(--pst-shell-text-sec);
+    margin-top: 0.25rem;
+    line-height: 1.25;
+}
+
+.pst-warning-text {
+    font-size: 0.7rem !important;
+    color: #ef4444 !important;
+    margin-top: 0.25rem !important;
+    line-height: 1.3 !important;
+}
+
+/* Custom Dropdown Styling */
+.pst-custom-select-container {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 180px !important;
+}
+
+.pst-custom-select-toggle {
+    width: 100% !important;
+    background-color: var(--pst-shell-bg) !important;
+    color: var(--pst-shell-text) !important;
+    border: 1px solid var(--pst-shell-border) !important;
+    border-radius: 4px !important;
+    padding: 0.375rem 0.5rem !important;
+    font-size: 0.8rem !important;
+    font-family: var(--pst-shell-font) !important;
+    cursor: pointer !important;
+    text-align: right !important;
+    transition: border-color var(--pst-transition-duration) var(--pst-transition-easing), background-color var(--pst-transition-duration) var(--pst-transition-easing) !important;
+}
+
+.pst-custom-select-toggle:hover {
+    border-color: var(--pst-shell-text-sec) !important;
+    background-color: var(--pst-shell-hover) !important;
+}
+
+.pst-custom-select-toggle:focus {
+    outline: none !important;
+    border-color: var(--pst-shell-text-sec) !important;
+}
+
+.pst-custom-select-options {
+    display: none !important;
+    position: absolute !important;
+    top: 100% !important;
+    right: 0 !important;
+    margin-top: 4px !important;
+    width: 100% !important;
+    min-width: 180px !important;
+    background-color: var(--pst-shell-bg) !important;
+    border: 1px solid var(--pst-shell-border) !important;
+    border-radius: var(--pst-shell-radius) !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+    z-index: 1000 !important;
+    max-height: 200px !important;
+    overflow-y: auto !important;
+    padding: 4px !important;
+}
+
+.pst-custom-select-container.is-open .pst-custom-select-options {
+    display: block !important;
+}
+
+.pst-custom-select-option {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0.375rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    font-family: var(--pst-shell-font) !important;
+    color: var(--pst-shell-text) !important;
+    cursor: pointer !important;
+    border-radius: 4px !important;
+    transition: background-color var(--pst-transition-duration) var(--pst-transition-easing) !important;
+}
+
+.pst-custom-select-option:hover {
+    background-color: var(--pst-shell-hover) !important;
+    color: var(--pst-shell-text) !important;
+}
+
+/* Range Slider Custom Styling */
+.pst-controls-area input[type="range"] {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    height: 1.25rem !important;
+    padding: 0 !important;
+    border: none !important;
+    width: auto !important;
+}
+
+.pst-controls-area input[type="range"]:focus {
+    outline: none !important;
+}
+
+/* Track styling */
+.pst-controls-area input[type="range"]::-webkit-slider-runnable-track {
+    background-color: var(--pst-shell-border) !important;
+    height: 4px !important;
+    border-radius: 2px !important;
+}
+
+.pst-controls-area input[type="range"]::-moz-range-track {
+    background-color: var(--pst-shell-border) !important;
+    height: 4px !important;
+    border-radius: 2px !important;
+}
+
+/* Thumb styling */
+.pst-controls-area input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    margin-top: -6px !important;
+    background-color: var(--pst-shell-text-sec) !important;
+    height: 16px !important;
+    width: 16px !important;
+    border-radius: 50% !important;
+    border: 2px solid var(--pst-shell-bg) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
+    transition: background-color var(--pst-transition-duration) var(--pst-transition-easing), transform var(--pst-transition-duration) var(--pst-transition-easing) !important;
+}
+
+.pst-controls-area input[type="range"]::-webkit-slider-thumb:hover {
+    background-color: var(--pst-shell-text) !important;
+    transform: scale(1.1) !important;
+}
+
+.pst-controls-area input[type="range"]::-moz-range-thumb {
+    background-color: var(--pst-shell-text-sec) !important;
+    height: 16px !important;
+    width: 16px !important;
+    border-radius: 50% !important;
+    border: 2px solid var(--pst-shell-bg) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
+    transition: background-color var(--pst-transition-duration) var(--pst-transition-easing), transform var(--pst-transition-duration) var(--pst-transition-easing) !important;
+}
+
+.pst-controls-area input[type="range"]::-moz-range-thumb:hover {
+    background-color: var(--pst-shell-text) !important;
+    transform: scale(1.1) !important;
+}
+
+/* Control subgroups with vertical line */
+.pst-control-subgroup {
+    padding-left: 0 !important;
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
+    border-left: none !important;
+}
+
+/* Unified Panel Headings */
+.pst-panel-heading {
+    font-size: 0.8rem !important;
+    font-weight: 400 !important;
+    color: var(--pst-shell-text-sec) !important;
+    font-family: var(--pst-shell-font) !important;
+    padding-bottom: 0.75rem !important;
+    margin-bottom: 1rem !important;
+    border-bottom: none !important;
+}
+
+/* Unified Accordion Toggles */
+.pst-nav-accordion-toggle,
+.pst-control-accordion-toggle {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: 0.5rem 0 !important;
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.25rem !important;
+    font-size: 0.8rem !important;
+    font-weight: 400 !important;
+    color: var(--pst-shell-text-sec) !important;
+    font-family: var(--pst-shell-font) !important;
+    transition: color var(--pst-transition-duration) var(--pst-transition-easing) !important;
+}
+
+.pst-nav-accordion-toggle:hover,
+.pst-control-accordion-toggle:hover {
+    color: var(--pst-shell-text) !important;
+}
+
+.pst-nav-accordion-icon,
+.pst-control-accordion-icon {
+    width: 0.75rem !important;
+    height: 0.75rem !important;
+    color: var(--pst-shell-text-sec) !important;
+    transition: transform var(--pst-transition-duration) var(--pst-transition-easing) !important;
+}
+
+.pst-nav-accordion-toggle.is-open .pst-nav-accordion-icon,
+.pst-control-accordion-toggle.is-open .pst-control-accordion-icon {
+    transform: rotate(180deg) !important;
+}
+
+.pst-nav-accordion-content,
+.pst-control-accordion-content {
+    max-height: 0;
+    overflow: hidden !important;
+    transition: max-height var(--pst-transition-duration) var(--pst-transition-easing) !important;
+}
+
+/* Force standardise properties form controls and inputs */
+.pst-controls-area input[type="text"],
+.pst-controls-area input[type="number"],
+.pst-controls-area select,
+.pst-controls-area textarea,
+.pst-controls-area .pst-custom-select-toggle {
+    background-color: var(--pst-shell-bg) !important;
+    color: var(--pst-shell-text) !important;
+    border: 1px solid var(--pst-shell-border) !important;
+    border-radius: 4px !important;
+    padding: 2px 6px !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    font-family: var(--pst-shell-font) !important;
+    outline: none !important;
+    text-align: right !important;
+    height: 24px !important;
+    width: 110px !important;
+    min-width: 110px !important;
+    max-width: 110px !important;
+    box-sizing: border-box !important;
+    transition: border-color var(--pst-transition-duration) var(--pst-transition-easing), box-shadow var(--pst-transition-duration) var(--pst-transition-easing) !important;
+}
+
+.pst-controls-area input[type="text"]:focus,
+.pst-controls-area input[type="number"]:focus,
+.pst-controls-area select:focus,
+.pst-controls-area textarea:focus,
+.pst-controls-area .pst-custom-select-toggle:focus {
+    border-color: var(--pst-shell-text-sec) !important;
+    box-shadow: 0 0 0 2px rgba(113, 113, 122, 0.1) !important;
+}
+
+/* Specific styling for nested headers like heading-xl, body-md */
+.pst-control-item label.font-semibold {
+    font-size: 0.8rem !important;
+    font-weight: 400 !important;
+    color: var(--pst-shell-text) !important;
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.pst-control-item.pst-control-item-col {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.25rem !important;
+}
+
+.pst-control-item.pst-control-item-col label {
+    font-size: 0.75rem !important;
+    font-weight: 400 !important;
+    color: var(--pst-shell-text-sec) !important;
+}
+
+.pst-control-item.pst-control-item-col input[type="text"] {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    text-align: left !important;
+}
+
+.pst-control-group-heading {
+    font-size: 0.85rem !important;
+    font-weight: 400 !important;
+    color: var(--pst-shell-text) !important;
+    margin-top: 0.75rem !important;
+    margin-bottom: 0.25rem !important;
+    font-family: var(--pst-shell-font) !important;
+}
+
+.pst-help-text {
+    font-size: 0.7rem !important;
+    color: var(--pst-shell-text-sec) !important;
+    margin-top: 0.25rem !important;
+    line-height: 1.3 !important;
+}
+
+/* Hamburger Dropdown & Submenus styling */
+#pst-hamburger-menu,
+#pst-menu-versions-submenu,
+#pst-menu-export-submenu {
+    background-color: var(--pst-shell-bg) !important;
+    border: 1px solid var(--pst-shell-border) !important;
+    box-shadow: var(--pst-shell-shadow) !important;
+    border-radius: var(--pst-shell-radius) !important;
+}
+
+#pst-hamburger-menu button,
+#pst-hamburger-menu a,
+#pst-menu-versions-submenu button,
+#pst-menu-versions-submenu a,
+#pst-menu-export-submenu button,
+#pst-menu-export-submenu a {
+    font-family: var(--pst-shell-font) !important;
+    transition: color var(--pst-transition-duration) var(--pst-transition-easing);
+    padding: 0.5rem 1rem !important;
+    line-height: 1.5 !important;
+}
+
+/* Ensure the versions and export submenus position correctly */
+#pst-menu-versions-submenu,
+#pst-menu-export-submenu {
+    left: 100%;
+    top: 0;
+    margin-top: 0;
+}
+
+/* Submenu Hover display rules */
+#pst-menu-versions-container:hover #pst-menu-versions-submenu {
+    display: block !important;
+}
+
+#pst-menu-export-container:hover #pst-menu-export-submenu {
+    display: block !important;
+}
+
+/* Compact visual layout spacing overrides */
+.pst-nav-link {
+    padding: 2px 8px !important;
+    margin-bottom: 2px !important;
+}
+
+.pst-nav-accordion-toggle,
+.pst-control-accordion-toggle {
+    padding: 2px 0 !important;
+    margin-top: 4px !important;
+    margin-bottom: 2px !important;
+}
+
+.pst-control-group {
+    padding: 2px 0 !important;
+    gap: 4px !important;
+}
+
+.pst-control-item {
+    gap: 4px !important;
+    padding: 2px 0 !important;
+}
+
+#pst-hamburger-menu button,
+#pst-hamburger-menu a,
+#pst-menu-versions-submenu button,
+#pst-menu-versions-submenu a,
+#pst-menu-export-submenu button,
+#pst-menu-export-submenu a {
+    padding: 4px 12px !important;
+}
+
+/* Pixel-based Font Size hierarchy (10px, 11px, 12px, 14px) */
+.pst-panel-heading,
+.pst-control-group-heading,
+#preview-heading,
+.pst-tab-btn {
+    font-size: 14px !important;
+}
+
+#preview-heading {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: normal !important;
+}
+
+.pst-nav-link,
+.pst-nav-accordion-toggle,
+.pst-control-accordion-toggle,
+.pst-control-item label,
+.pst-controls-area input,
+.pst-controls-area select,
+.pst-header-button,
+#pst-hamburger-menu button,
+#pst-hamburger-menu a,
+#pst-menu-versions-submenu button,
+#pst-menu-versions-submenu a,
+#pst-menu-export-submenu button,
+#pst-menu-export-submenu a {
+    font-size: 12px !important;
+}
+
+.pst-control-item.pst-control-item-col label,
+.pst-custom-select-option {
+    font-size: 11px !important;
+}
+
+.pst-help-text,
+.pst-warning-text {
+    font-size: 10px !important;
+}
+
+/* Force regular font-weight globally (excluding logo) */
+.pst-header button,
+.pst-header a,
+.pst-header span,
+.pst-left-panel,
+.pst-left-panel *,
+.pst-right-panel,
+.pst-right-panel *,
+#preview-header button,
+#preview-header span,
+#preview-header h2,
+.pst-tabs,
+.pst-tabs *,
+.pst-tab-panel,
+.pst-tab-panel *,
+#pst-hamburger-menu,
+#pst-hamburger-menu *,
+#pst-menu-versions-submenu,
+#pst-menu-versions-submenu *,
+#pst-menu-export-submenu,
+#pst-menu-export-submenu * {
+    font-weight: 400 !important;
+}
+
+/* Color hierarchy differentiation */
+.pst-panel-heading,
+.pst-control-group-heading,
+#preview-heading,
+.pst-header-logo {
+    color: var(--pst-shell-text) !important;
+}
+
+.pst-nav-link,
+.pst-nav-accordion-toggle,
+.pst-control-accordion-toggle,
+.pst-control-item label,
+.pst-controls-area input,
+.pst-controls-area select,
+.pst-tab-btn,
+.pst-header-button,
+#pst-hamburger-menu button,
+#pst-hamburger-menu a,
+#pst-menu-versions-submenu button,
+#pst-menu-versions-submenu a,
+#pst-menu-export-submenu button,
+#pst-menu-export-submenu a {
+    color: var(--pst-shell-text-sec) !important;
+}
+
+.pst-help-text,
+.pst-warning-text,
+.pst-control-item.pst-control-item-col label,
+.pst-custom-select-option {
+    color: var(--pst-shell-text-ter) !important;
+}
+
+/* Hover, Active, and Focus states overrides (text color only, no backgrounds) */
+.pst-nav-link:hover,
+.pst-nav-link.active,
+.pst-nav-link:focus,
+.pst-nav-accordion-toggle:hover,
+.pst-control-accordion-toggle:hover,
+.pst-tab-btn:hover,
+.pst-tab-btn.active,
+.pst-header-button:hover,
+#pst-hamburger-btn:hover,
+#dark-mode-toggle:hover,
+#pst-hamburger-menu button:hover,
+#pst-hamburger-menu a:hover,
+#pst-menu-versions-submenu button:hover,
+#pst-menu-versions-submenu a:hover,
+#pst-menu-export-submenu button:hover,
+#pst-menu-export-submenu a:hover {
+    background-color: transparent !important;
+    background: transparent !important;
+    color: #000000 !important;
+}
+
+.pst-dark-mode .pst-nav-link:hover,
+.pst-dark-mode .pst-nav-link.active,
+.pst-dark-mode .pst-nav-link:focus,
+.pst-dark-mode .pst-nav-accordion-toggle:hover,
+.pst-dark-mode .pst-control-accordion-toggle:hover,
+.pst-dark-mode .pst-tab-btn:hover,
+.pst-dark-mode .pst-tab-btn.active,
+.pst-dark-mode .pst-header-button:hover,
+.pst-dark-mode #pst-hamburger-btn:hover,
+.pst-dark-mode #dark-mode-toggle:hover,
+.pst-dark-mode #pst-hamburger-menu button:hover,
+.pst-dark-mode #pst-hamburger-menu a:hover,
+.pst-dark-mode #pst-menu-versions-submenu button:hover,
+.pst-dark-mode #pst-menu-versions-submenu a:hover,
+.pst-dark-mode #pst-menu-export-submenu button:hover,
+.pst-dark-mode #pst-menu-export-submenu a:hover {
+    background-color: transparent !important;
+    background: transparent !important;
+    color: #ffffff !important;
+}
+
+/* Tone down borders in tokens and diff tables */
+#tab-content-tokens table tr,
+#ai-diff-view table tr,
+#tab-content-tokens tr,
+#ai-diff-view tr {
+    border-color: var(--pst-shell-border) !important;
+}
+
+#tab-content-tokens table span[style*="background"],
+#ai-diff-view table span[style*="background"] {
+    border-color: var(--pst-shell-border) !important;
+}
+
+/* Modal Overlay and Dialog styling */
+.pst-modal-overlay > div {
+    background-color: var(--pst-shell-bg) !important;
+    border: 1px solid var(--pst-shell-border) !important;
+    color: var(--pst-shell-text) !important;
+}
+
+.pst-modal-overlay h2,
+.pst-modal-overlay h3,
+.pst-modal-overlay h4 {
+    color: var(--pst-shell-text) !important;
+}
+
+.pst-modal-overlay p,
+.pst-modal-overlay label {
+    color: var(--pst-shell-text-sec) !important;
+}
+
+/* Modal form controls */
+.pst-modal-overlay select,
+.pst-modal-overlay input[type="text"] {
+    background-color: var(--pst-shell-bg-app) !important;
+    color: var(--pst-shell-text) !important;
+    border: 1px solid var(--pst-shell-border) !important;
+}
+
+/* Modal buttons styling to respect dark and light theme */
+.pst-modal-overlay button:not(.bg-indigo-600):not(.bg-red-600):not(#ai-modal-close-btn) {
+    background-color: var(--pst-shell-bg) !important;
+    color: var(--pst-shell-text-sec) !important;
+    border: 1px solid var(--pst-shell-border) !important;
+    transition: all var(--pst-transition-duration) var(--pst-transition-easing) !important;
+}
+
+.pst-modal-overlay button:not(.bg-indigo-600):not(.bg-red-600):not(#ai-modal-close-btn):hover {
+    background-color: var(--pst-shell-hover) !important;
+    color: var(--pst-shell-text) !important;
+}
+
+/* Code snippet container styling overrides */
+.pst-center-panel pre {
+    background-color: var(--pst-shell-bg-app) !important;
+    border-color: var(--pst-shell-border) !important;
+}
+
+/* Comparison view containers */
+#ai-diff-view > div > div {
+    background-color: var(--pst-shell-bg-app) !important;
+    border-color: var(--pst-shell-border) !important;
+}
+
+/* Diff View live preview card */
+#ai-live-preview-card {
+    background-color: var(--pst-shell-bg) !important;
+    border-color: var(--pst-shell-border) !important;
+}
+
+#ai-preview-title {
+    color: var(--pst-shell-text) !important;
+}
+
+#ai-preview-text {
+    color: var(--pst-shell-text-sec) !important;
+}
+
+/* Standardise input controls and textareas inside the controls area */
+.pst-controls-area textarea {
+    background-color: var(--pst-shell-bg) !important;
+    color: var(--pst-shell-text) !important;
+    border: 1px solid var(--pst-shell-border) !important;
+    border-radius: 4px !important;
+    padding: 0.375rem 0.5rem !important;
+    font-size: 0.8rem !important;
+    font-family: var(--pst-shell-font) !important;
+    outline: none !important;
+    text-align: right !important;
+    transition: border-color var(--pst-transition-duration) var(--pst-transition-easing), box-shadow var(--pst-transition-duration) var(--pst-transition-easing) !important;
+}
+
+.pst-controls-area textarea:focus {
+    border-color: var(--pst-shell-text-sec) !important;
+    box-shadow: 0 0 0 2px rgba(113, 113, 122, 0.1) !important;
+}
+
+/* Checkbox styling overrides */
+.pst-controls-area input[type="checkbox"],
+.pst-app-checkbox {
+    background-color: var(--pst-shell-bg) !important;
+    border: 1px solid var(--pst-shell-border) !important;
+    color: var(--pst-shell-text) !important;
+    accent-color: var(--pst-shell-text-sec) !important;
+}
+
+/* Toning down divider lines inside the controls panel */
+.pst-controls-area .border-t,
+.pst-controls-area [class*="border-t"] {
+    border-top-color: var(--pst-shell-border) !important;
+}
+.pst-controls-area .border-b,
+.pst-controls-area [class*="border-b"] {
+    border-bottom-color: var(--pst-shell-border) !important;
+}
+
+/* Contrast enhancements for Tailwind text colors in dark mode */
+.pst-dark-mode .text-zinc-500,
+.pst-dark-mode .text-neutral-500,
+.pst-dark-mode .text-gray-500 {
+    color: #a1a1aa !important;
+}
+
+.pst-dark-mode .text-zinc-600,
+.pst-dark-mode .text-neutral-600,
+.pst-dark-mode .text-gray-600 {
+    color: #d4d4d8 !important;
+}
+
+.pst-dark-mode .text-zinc-700,
+.pst-dark-mode .text-neutral-700,
+.pst-dark-mode .text-gray-700 {
+    color: #e4e4e7 !important;
+}
+
+.pst-dark-mode .text-zinc-400,
+.pst-dark-mode .text-neutral-400,
+.pst-dark-mode .text-gray-400 {
+    color: #f4f4f5 !important;
+}
+
+/* Brighten indigo links in dark mode for better accessibility */
+.pst-dark-mode .text-indigo-600 {
+    color: #818cf8 !important;
+}
+
+.pst-dark-mode .text-indigo-600:hover {
+    color: #a5b4fc !important;
+}
+
+/* Style token labels inside the preview canvas to match category headings */
+.pst-preview-heading,
+.preview-canvas .font-mono,
+.pst-preview-area .font-mono {
+    color: #a1a1aa !important;
+}
+
+/* Color and gradient swatch rectangle background and border in dark mode */
+.pst-dark-mode .preview-canvas .h-24.w-\[120px\],
+.pst-dark-mode .pst-preview-area .h-24.w-\[120px\] {
+    background-color: #000000 !important;
+    border-color: #27272a !important;
+}
+
+
+/* Remove sliders in controls area */
+.pst-controls-area input[type="range"] {
+    display: none !important;
+}
+
+/* Custom browser spin buttons hit area scaling */
+.pst-controls-area input[type="number"]::-webkit-inner-spin-button,
+.pst-controls-area input[type="number"]::-webkit-outer-spin-button {
+    height: 20px !important;
+    width: 14px !important;
+    opacity: 1 !important;
+    cursor: pointer !important;
+}
+
+/* Force regular weight and 12px font size on all properties panel elements except the main panel header */
+.pst-right-panel .pst-control-group-heading,
+.pst-right-panel .pst-control-accordion-toggle,
+.pst-right-panel .pst-control-item label,
+.pst-right-panel .pst-control-item label.font-semibold,
+.pst-right-panel .pst-control-item.pst-control-item-col label,
+.pst-right-panel input,
+.pst-right-panel select,
+.pst-right-panel textarea,
+.pst-right-panel button,
+.pst-right-panel a {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    font-family: var(--pst-shell-font) !important;
+}
+
+/* Hierarchical text color overrides for properties panel */
+.pst-right-panel .pst-control-group-heading,
+.pst-right-panel .pst-control-item label.font-semibold {
+    color: var(--pst-shell-text) !important;
+}
+
+.pst-right-panel .pst-control-accordion-toggle,
+.pst-right-panel .pst-control-item label {
+    color: var(--pst-shell-text-sec) !important;
+}
+
+/* Ensure all items and subgroups align perfectly to the left of the panel content */
+.pst-controls-area .pst-control-group,
+.pst-controls-area .pst-control-subgroup,
+.pst-controls-area .pst-control-item {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+/* Styling for Reset to Defaults buttons */
+.pst-controls-area button[id*="reset-"] {
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: #ef4444 !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    text-decoration: none !important;
+    transition: color var(--pst-transition-duration) var(--pst-transition-easing) !important;
+}
+
+.pst-controls-area button[id*="reset-"]:hover {
+    color: #dc2626 !important;
+}
+
+.pst-dark-mode .pst-controls-area button[id*="reset-"] {
+    color: #f87171 !important;
+}
+
+.pst-dark-mode .pst-controls-area button[id*="reset-"]:hover {
+    color: #fca5a5 !important;
+}
+
+/* Align custom select toggle contents vertically */
+.pst-custom-select-toggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    height: 24px !important;
+}
+
+/* Scale inline color input container wrapper */
+.pst-controls-area .pst-color-input-container {
+    width: 110px !important;
+    min-width: 110px !important;
+    max-width: 110px !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+}
+
+.pst-controls-area .pst-color-input-container input[type="text"] {
+    width: 80px !important;
+    min-width: 80px !important;
+    max-width: 80px !important;
+    height: 24px !important;
+    padding: 2px 6px !important;
+}
+
+.pst-controls-area .pst-color-input-container input[type="color"] {
+    width: 24px !important;
+    min-width: 24px !important;
+    max-width: 24px !important;
+    height: 24px !important;
+    padding: 0 !important;
+    margin: 0 0 0 6px !important;
+    border: 1px solid var(--pst-shell-border) !important;
+    border-radius: 2px !important;
+    background: transparent !important;
+    box-sizing: border-box !important;
+    cursor: pointer !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+
+.pst-controls-area .pst-color-input-container input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0 !important;
+}
+
+.pst-controls-area .pst-color-input-container input[type="color"]::-webkit-color-swatch {
+    border: none !important;
+    border-radius: 2px !important;
+}
+
+.pst-controls-area .pst-color-input-container input[type="color"]::-moz-color-swatch {
+    border: none !important;
+    border-radius: 2px !important;
+}
+
+
+/* Ensure hidden native select dropdown elements stay completely hidden */
+.pst-controls-area select.hidden,
+.pst-controls-area select[class*="hidden"] {
+    display: none !important;
+}
+
+/* Properties Panel header bar alignment and scroll prevention */
+.pst-right-panel {
+    padding: 0 !important;
+    overflow-x: hidden !important;
+}
+
+.pst-right-panel > h2.pst-panel-heading {
+    display: flex !important;
+    align-items: center !important;
+    height: 40px !important;
+    padding: 0 1.25rem !important;
+    margin: 0 !important;
+    border-bottom: 1px solid var(--pst-shell-border) !important;
+    box-sizing: border-box !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: var(--pst-shell-text) !important;
+    background-color: var(--pst-shell-bg) !important;
+    flex-shrink: 0 !important;
+}
+
+.pst-controls-area {
+    padding: 1.25rem !important;
+    overflow-x: hidden !important;
+}
+
+/* Disable transitions on initial render or state re-renders to prevent accordion jump animations */
+.pst-no-transition,
+.pst-no-transition * {
+    transition: none !important;
+}
+
+
+/* Category header accordion tweaks */
+.pst-control-accordion-toggle span {
+    text-transform: capitalize !important;
+}
+
+.pst-right-panel .pst-control-accordion-toggle {
+    color: var(--pst-shell-text) !important; /* Make heading labels darker/higher contrast */
+    margin-bottom: 8px !important;
+    padding-bottom: 4px !important;
+}
+
+/* Category vertical separation spacing and edge-to-edge horizontal divider borders */
+.pst-controls-area > .pst-control-group:not(.pst-control-subgroup),
+.pst-controls-area .pst-control-accordion {
+    position: relative !important;
+    padding-bottom: 1.25rem !important;
+    margin-bottom: 1.25rem !important;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+.pst-controls-area > .pst-control-group:not(.pst-control-subgroup)::after,
+.pst-controls-area .pst-control-accordion::after {
+    content: "" !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: -1.25rem !important;
+    right: -1.25rem !important;
+    height: 1px !important;
+    background-color: var(--pst-shell-border) !important;
+}
+
+/* Remove all internal borders from controls area */
+.pst-controls-area hr,
+.pst-controls-area .border-t,
+.pst-controls-area .border-b,
+.pst-controls-area [class*="border-t"],
+.pst-controls-area [class*="border-b"] {
+    border: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+/* Dedicated styling for custom select container to prevent double borders and maintain alignment */
+.pst-controls-area .pst-custom-select-container {
+    width: 110px !important;
+    min-width: 110px !important;
+    max-width: 110px !important;
+    position: relative !important;
+    height: 24px !important;
+    border: none !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Number input override to position spin buttons flush right */
+.pst-controls-area input[type="number"] {
+    padding-right: 2px !important;
+}
+
+.pst-controls-area input[type="number"]::-webkit-inner-spin-button,
+.pst-controls-area input[type="number"]::-webkit-outer-spin-button {
+    margin: 0 0 0 4px !important;
+}

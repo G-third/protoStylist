@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>protoStylist</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:wght@100;300;400;700;900&family=Montserrat:wght@100..900&family=Noto+Serif:wght@100..900&family=Playfair+Display:wght@400..900&family=Prata&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="text-gray-800">
+
+    <div class="flex flex-col h-screen">
+        <!-- Header -->
+        <header class="pst-header bg-white flex justify-between items-center relative">
+            <div class="flex items-center space-x-3">
+                <!-- Hamburger Dropdown Container -->
+                <div class="relative inline-block text-left animate-none" id="pst-hamburger-dropdown-container">
+                    <button id="pst-hamburger-btn" title="Menu"
+                        class="pst-header-button h-8 w-8 flex items-center justify-center bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <!-- Main Hamburger Menu -->
+                    <div id="pst-hamburger-menu"
+                        class="hidden absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white border border-gray-200 ring-1 ring-black ring-opacity-5 z-50">
+                        <div class="py-1" role="menu">
+                            <button id="ai-generator-btn"
+                                class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100"
+                                role="menuitem">AI Theme</button>
+                            <button id="save-btn"
+                                class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100"
+                                role="menuitem">Save</button>
+
+                            <!-- Versions Submenu -->
+                            <div class="relative group/version" id="pst-menu-versions-container">
+                                <button
+                                    class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center justify-between"
+                                    role="menuitem">
+                                    <span>Versions</span>
+                                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                                <div id="pst-menu-versions-submenu"
+                                    class="hidden absolute left-full top-0 mt-0 w-64 rounded-md shadow-lg bg-white border border-gray-200 ring-1 ring-black ring-opacity-5 z-50">
+                                    <div class="py-1" id="pst-menu-versions-list"></div>
+                                </div>
+                            </div>
+
+                            <button id="share-link-btn"
+                                class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100"
+                                role="menuitem">Share Link</button>
+                            <button id="import-json-btn"
+                                class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100"
+                                role="menuitem">Import JSON</button>
+
+                            <!-- Export Submenu -->
+                            <div class="relative group/export" id="pst-menu-export-container">
+                                <button
+                                    class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 flex items-center justify-between"
+                                    role="menuitem">
+                                    <span>Export...</span>
+                                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </button>
+                                <div id="pst-menu-export-submenu"
+                                    class="hidden absolute left-full top-0 mt-0 w-48 rounded-md shadow-lg bg-white border border-gray-200 ring-1 ring-black ring-opacity-5 z-50">
+                                    <div class="py-1">
+                                        <button id="export-css-btn"
+                                            class="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-gray-100">Export
+                                            CSS Stylesheet</button>
+                                        <button id="export-js-btn"
+                                            class="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-gray-100">Export
+                                            JS Components</button>
+                                        <button id="export-json-btn"
+                                            class="w-full text-left px-4 py-2 text-xs text-gray-700 hover:bg-gray-100">Export
+                                            Session JSON</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button id="about-btn"
+                                class="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100"
+                                role="menuitem">About p/S</button>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="pst-header-logo text-xl font-bold text-black select-none">proto/Stylist</h1>
+            </div>
+
+            <div class="flex items-center space-x-2">
+                <!-- Dark Mode Toggle Button -->
+                <button id="dark-mode-toggle"
+                    class="pst-header-button h-8 w-8 flex items-center justify-center bg-white text-gray-700 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors"
+                    title="Toggle Dark Mode">
+                    <svg id="dark-mode-sun-icon" class="w-4 h-4 hidden" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path>
+                        <path d="M12 20v2"></path>
+                        <path d="M4.93 4.93l1.41 1.41"></path>
+                        <path d="M17.66 17.66l1.41 1.41"></path>
+                        <path d="M2 12h2"></path>
+                        <path d="M20 12h2"></path>
+                        <path d="M6.34 17.66l-1.41 1.41"></path>
+                        <path d="M19.07 4.93l-1.41 1.41"></path>
+                    </svg>
+                    <svg id="dark-mode-moon-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                </button>
+                <input type="file" id="import-json-input" accept=".json" class="hidden">
+            </div>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div id="main-grid" class="pst-main-grid relative flex-grow h-full overflow-hidden">
+
+            <!-- Left Panel: Navigation Menu -->
+            <aside id="left-panel" class="pst-left-panel">
+                <div id="left-panel-content" class="pst-left-panel-content">
+                    <!--<h2 class="pst-panel-heading"></h2>-->
+                    <nav id="main-nav" class="pst-main-nav"></nav>
+                </div>
+            </aside>
+
+            <!-- Center Panel: Preview & Tabbed Code/Details -->
+            <main class="pst-center-panel relative z-10 flex flex-col h-full overflow-hidden">
+                <!-- Top Header Bar -->
+                <div class="pst-tabs flex flex-shrink-0 justify-between items-center w-full">
+                    <div class="flex items-center gap-2">
+                        <h2 id="preview-heading" class="pst-panel-heading text-xs font-mono text-zinc-400">Preview</h2>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="flex gap-2">
+                            <button id="tab-btn-tokens" class="pst-tab-btn px-2 text-xs font-semibold">Tokens</button>
+                            <button id="tab-btn-code" class="pst-tab-btn px-2 text-xs font-semibold">Code</button>
+                            <button id="tab-btn-specs" class="pst-tab-btn px-2 text-xs font-semibold">Specs</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2-Column Content Layout -->
+                <div class="pst-center-content-layout flex flex-grow w-full overflow-hidden">
+                    <!-- Left Column: Preview Area -->
+                    <div id="preview-area" class="pst-preview-area flex-grow overflow-y-auto"></div>
+
+                    <!-- Right Column: Sliding Tabs Drawer -->
+                    <div id="pst-tabs-drawer" class="pst-tabs-drawer">
+                        <div class="pst-tab-content">
+                            <!-- Tokens Panel -->
+                            <div id="tab-content-tokens" class="pst-tab-panel hidden"></div>
+
+                            <!-- Code Panel -->
+                            <div id="tab-content-code" class="pst-tab-panel hidden space-y-4">
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h4 class="pst-drawer-heading mb-1">HTML & Utility Classes</h4>
+                                        <button class="pst-copy-btn text-xs text-indigo-600 hover:underline font-semibold"
+                                            data-copy-target="code-html">Copy HTML</button>
+                                    </div>
+                                    <pre class="bg-zinc-50 dark:bg-zinc-950 p-3 rounded-md border border-zinc-200 overflow-x-auto"><code id="code-html" class="text-xs font-mono text-zinc-700 dark:text-zinc-300"></code></pre>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between items-center mb-1">
+                                        <h4 class="pst-drawer-heading mb-1">Vanilla JS Web Component</h4>
+                                        <button class="pst-copy-btn text-xs text-indigo-600 hover:underline font-semibold"
+                                            data-copy-target="code-js">Copy JS</button>
+                                    </div>
+                                    <pre class="bg-zinc-50 dark:bg-zinc-950 p-3 rounded-md border border-zinc-200 overflow-x-auto"><code id="code-js" class="text-xs font-mono text-zinc-700 dark:text-zinc-300"></code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Specs Panel -->
+                            <div id="tab-content-specs" class="pst-tab-panel hidden"></div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Right Panel: Controls -->
+            <aside class="pst-right-panel relative z-20 flex flex-col h-full overflow-hidden">
+                <h2 class="pst-panel-heading">Properties</h2>
+                <div id="controls-area" class="pst-controls-area flex-grow overflow-y-auto"></div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="about-modal-overlay"
+        class="pst-modal-overlay fixed inset-0 bg-black/40 z-50 hidden items-center justify-center p-4 backdrop-blur-xs">
+        <div id="about-modal-content"
+            class="bg-white rounded-lg shadow-xl border border-zinc-200 p-6 max-w-2xl w-full relative">
+            <button id="about-modal-close-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+            <h2 class="text-lg font-bold mb-4">About proto/Stylist</h2>
+            <div class="text-neutral-600 text-sm space-y-4">
+                <p><strong>proto/Stylist</strong> is a design system prototyping workbench. It allows product designers to dynamically customise and preview design tokens (typography, colours, spacing, curves, borders) and UI component styles in real time.</p>
+                
+                <h3 class="font-semibold text-zinc-900 mt-3 text-xs uppercase tracking-wider">Core Features</h3>
+                <ul class="list-disc list-outside space-y-1.5 pl-5">
+                    <li>Start configuring variables under <strong>Baseline Styles</strong> to establish typography and colour scales.</li>
+                    <li>Move down to <strong>Controls & Input</strong> and <strong>Components</strong> to refine component styles.</li>
+                    <li>Toggle the <strong>Code</strong> tab inside the preview area to copy clean HTML layouts or Web Components.</li>
+                </ul>
+
+                <h3 class="font-semibold text-zinc-900 mt-3 text-xs uppercase tracking-wider">Export Functions</h3>
+                <ul class="list-disc list-outside space-y-1.5 pl-5">
+                    <li><strong>Export CSS</strong>: Downloads standard CSS custom properties (tokens) and component utility classes for inclusion in web projects.</li>
+                    <li><strong>Export JS</strong>: Exports the active configuration logic and component registration scripts for programmatic runtime theme injection.</li>
+                    <li><strong>Export JSON</strong>: Saves the complete configuration schema as a shareable file, allowing you to back up and restore your design sessions.</li>
+                </ul>
+
+                <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded text-xs text-amber-800">
+                    <p><strong>Proof of Concept Note</strong>: This is a client side proof of concept with no persistent server backend database. All styling sessions are saved using local storage in your browser. Since local storage can be wiped by cache cleaning, it is highly recommended to export your configurations as <strong>JSON</strong> files to preserve your work.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Session Overwrite Warning Modal -->
+    <div id="overwrite-modal-overlay"
+        class="pst-modal-overlay fixed inset-0 bg-black/40 z-50 hidden items-center justify-center p-4 backdrop-blur-xs">
+        <div class="bg-white rounded-lg shadow-xl border border-zinc-200 p-6 max-w-md w-full relative">
+            <h2 class="text-lg font-bold text-red-600 mb-2">Overwrite Active Session?</h2>
+            <p class="text-sm text-gray-600 mb-6">
+                You are about to load a shared theme configuration. Doing so will permanently overwrite your active
+                styling session and unsaved baseline changes.
+            </p>
+            <div class="flex justify-end space-x-3">
+                <button id="overwrite-cancel-btn"
+                    class="px-4 py-2 text-xs font-semibold bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md border border-gray-300">Cancel</button>
+                <button id="overwrite-confirm-btn"
+                    class="px-4 py-2 text-xs font-semibold bg-red-600 hover:bg-red-700 text-white rounded-md">Confirm
+                    Overwrite</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Autogenerator Setup & Comparison Modal -->
+    <div id="ai-generator-modal-overlay"
+        class="pst-modal-overlay fixed inset-0 bg-black/40 z-50 hidden items-center justify-center p-4 backdrop-blur-xs">
+        <div
+            class="bg-white rounded-lg shadow-xl border border-zinc-200 p-6 max-w-3xl w-full relative flex flex-col max-h-[85vh]">
+            <button id="ai-modal-close-btn" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+
+            <h2 class="text-lg font-bold mb-4">AI Token & Theme Autogenerator</h2>
+
+            <!-- Setup Form -->
+            <div id="ai-setup-form" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-zinc-500 tracking-wider mb-1">Target Industry /
+                            Context</label>
+                        <select id="ai-industry"
+                            class="w-full bg-zinc-50 border border-zinc-300 rounded-md p-2 text-sm">
+                            <option value="SaaS & Tech Enterprise">SaaS & Tech Enterprise</option>
+                            <option value="Finance & Professional Services">Finance & Professional Services</option>
+                            <option value="Healthcare & Wellness">Healthcare & Wellness</option>
+                            <option value="Creative Agency & Portfolio">Creative Agency & Portfolio</option>
+                            <option value="E-Commerce & Retail">E-Commerce & Retail</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-zinc-500 tracking-wider mb-1">Brand Mood /
+                            Vibe</label>
+                        <select id="ai-mood" class="w-full bg-zinc-50 border border-zinc-300 rounded-md p-2 text-sm">
+                            <option value="Clean & Minimalist">Clean & Minimalist</option>
+                            <option value="Vibrant & Playful">Vibrant & Playful</option>
+                            <option value="Dark & Futuristic">Dark & Futuristic</option>
+                            <option value="Serene & Organic">Serene & Organic</option>
+                            <option value="Classic & Executive">Classic & Executive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-zinc-500 tracking-wider mb-1">Primary Seed
+                        Colour</label>
+                    <div class="flex items-center space-x-2">
+                        <input id="ai-seed-color" type="color" value="#4f46e5"
+                            class="w-12 h-8 border border-zinc-300 rounded-md cursor-pointer">
+                        <input id="ai-seed-hex" type="text" value="#4f46e5"
+                            class="bg-zinc-50 border border-zinc-300 rounded-md p-1.5 text-sm w-28 text-center font-mono">
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-end">
+                    <button id="ai-generate-run-btn"
+                        class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-md text-sm">Autogenerate
+                        Theme</button>
+                </div>
+            </div>
+
+            <!-- Loading View -->
+            <div id="ai-loading-view" class="hidden py-12 flex flex-col items-center justify-center space-y-4">
+                <svg class="animate-spin h-8 w-8 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+                <p class="text-sm font-semibold text-zinc-500">Gemini is autogenerating tokens and system styles...</p>
+            </div>
+
+            <!-- Comparison Diff View -->
+            <div id="ai-diff-view" class="hidden flex-grow flex flex-col overflow-hidden">
+                <p class="text-xs text-zinc-500 mb-3">Review the AI recommendations. Modified tokens are highlighted.
+                </p>
+                <div class="grid grid-cols-2 gap-4 flex-grow overflow-hidden min-h-0">
+                    <!-- Left: Table comparison -->
+                    <div class="overflow-y-auto border border-zinc-200 rounded-md p-2 bg-zinc-50">
+                        <table class="w-full text-xs font-mono">
+                            <thead>
+                                <tr class="text-[10px] text-zinc-400 tracking-wider text-left border-b border-zinc-200">
+                                    <th class="pb-1">Token Name</th>
+                                    <th class="pb-1 text-center">Current</th>
+                                    <th class="pb-1 text-right">Proposed</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ai-diff-table-body"></tbody>
+                        </table>
+                    </div>
+
+                    <!-- Right: Live Visual Preview -->
+                    <div
+                        class="border border-zinc-200 rounded-md p-4 bg-zinc-50 dark:bg-zinc-900 flex flex-col justify-center items-center space-y-4">
+                        <h4 class="pst-drawer-heading mb-2">Proposed Layout Preview</h4>
+                        <div id="ai-live-preview-card"
+                            class="w-full bg-white dark:bg-zinc-800 p-4 rounded-lg shadow-sm border border-zinc-200 text-center space-y-3">
+                            <h3 id="ai-preview-title" class="text-lg font-bold text-gray-900">Design System</h3>
+                            <p id="ai-preview-text" class="text-xs text-gray-500">Previewing the autogenerated colors
+                                and typography sizing values.</p>
+                            <button id="ai-preview-btn"
+                                class="px-4 py-2 bg-indigo-600 text-white text-xs font-bold rounded-sm">Primary
+                                Button</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-end space-x-3 flex-shrink-0">
+                    <button id="ai-diff-back-btn"
+                        class="px-4 py-2 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md border border-gray-300">Back</button>
+                    <button id="ai-diff-apply-btn"
+                        class="px-6 py-2 text-xs bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-md">Apply
+                        Theme</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- This style tag is used by JavaScript to inject dynamic styles -->
+    <style id="dynamic-styles"></style>
+
+    <!-- Custom JavaScript -->
+    <script src="typography.js"></script>
+    <script src="color.js"></script>
+    <script src="curves.js"></script>
+    <script src="spacing.js"></script>
+    <script src="borders.js"></script>
+    <script src="icon.js"></script>
+    <script src="button.js"></script>
+    <script src="text-input.js"></script>
+    <script src="textarea-input.js"></script>
+    <script src="select-input.js"></script>
+    <script src="checkbox-radio.js"></script>
+    <script src="accordion.js"></script>
+    <script src="tab.js"></script>
+    <script src="modal.js"></script>
+    <script src="progress.js"></script>
+    <script src="text-content.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
